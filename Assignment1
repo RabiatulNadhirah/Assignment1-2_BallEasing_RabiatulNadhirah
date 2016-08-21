@@ -1,0 +1,55 @@
+import controlP5.*;
+ControlP5 cp5;
+float x;
+float y;
+float easing = 0.05;
+
+void setup() {
+  size(640, 360); 
+  noStroke();  
+  cp5 = new ControlP5(this);
+      cp5.addSlider("v1")
+         .setPosition(150, 100)
+         .setSize(100, 400)  //x,y
+         .setRange(0, 100) //jarak 0 - 100
+         .setValue(100) 
+         .setColorCaptionLabel(color(237,0,0));
+         //cp5.addButton("button")
+         //.setPosition(50, 100)
+         //.setSize(50, 50);
+}
+
+void draw() { 
+  background(0);
+  
+  float targetX = mouseX;
+  float dx = targetX - x;
+  x += dx * easing;
+  
+  float targetY = mouseY;
+  float dy = targetY - y;
+  y += dy * easing;
+  
+  ellipse(x, y, 66, 66);
+  if (mouseX < 360) {
+    rect(0, 0, 360, 640); // Left
+  } else {
+    rect(360, 0, 360, 640); // Right
+  }
+  if (mouseButton == LEFT) {
+    fill(random(255)); // Black
+  } else if (mouseButton == RIGHT) {
+    fill(255); // White
+  } else { 
+    fill(255); // Gray
+  }
+  //rect(25, 25, 50, 50);
+  if (keyPressed == true) {
+    int x = key - 32;
+    line(x, 170, x, height);
+  }
+  
+  //void mousePressed() {
+  rect(mouseX, mouseY, 33, 33);
+  
+}
